@@ -1,3 +1,5 @@
+"use client"
+
 export const saveQuestions = (questions) => {
     localStorage.setItem('questions', JSON.stringify(questions));
   };
