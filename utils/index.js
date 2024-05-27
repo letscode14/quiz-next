@@ -17,3 +17,5 @@ export const saveQuestions = (questions) => {
     const answers = localStorage.getItem('answers');
     return answers ? JSON.parse(answers) : {};
   };
+
+  

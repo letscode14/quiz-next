@@ -1,7 +1,11 @@
 "use client";
 
+import withAuth from '@/components/withAuth.js';
+
+import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { saveQuestions, getQuestions } from '../../utils/index.js';
+import Button from '@/components/Button.js';
 
 const Instructor = () => {
   const [question, setQuestion] = useState('');
@@ -10,16 +14,17 @@ const Instructor = () => {
   const [questions, setQuestions] = useState(getQuestions());
 
   const handleAddQuestion = () => {
+    const notify = (message) => toast(message);
     if(!question){
-      return alert('Add the question')
+      return notify('Add the question')
     }
 
      if(!options.every(elem => elem.trim() !='')){
-       return alert('Provide all options')
+       return notify('Provide all options')
      }
 
      if(!correctOption){
-      return alert('Provide correct option')
+      return notify('Provide correct option')
      }
 
 
@@ -38,11 +43,13 @@ const Instructor = () => {
     setQuestion('');
     setOptions(['', '', '', '']);
     setCorrectOption('');
-
+    notify('question added Successfully')
   };
 
   return (
-    <div className='d-flex vw-100 vh-100 justify-content-center align-items-center'>
+    <div>
+      <Button/>
+      <div className='d-flex vw-100 vh-100 justify-content-center align-items-center'>
       
       <div style={{width:'350px'}}>
       <h1>INSTRUCTOR</h1>
@@ -109,8 +116,11 @@ const Instructor = () => {
      
      
     </div>
+    </div>
+    
+   
   );
 };
 
-export default Instructor;
+export default withAuth(Instructor);
 
